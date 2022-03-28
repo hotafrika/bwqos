@@ -36,6 +36,10 @@ func newConn(conn net.Conn, listener *Listener) *Conn {
 func (lc *Conn) Write(b []byte) (N int, err error) {
 	for left := 0; left < len(b); {
 		take := lc.getTake()
+		if take == 0 {
+			time.Sleep(time.Second) // because usually we try to send data for 1 second
+			continue
+		}
 
 		right := left + take
 		if right > len(b) {
