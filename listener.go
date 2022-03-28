@@ -1,7 +1,6 @@
 package bwqos
 
 import (
-	"fmt"
 	"net"
 	"sync"
 	"time"
@@ -85,6 +84,5 @@ func (ll *Listener) Accept() (net.Conn, error) {
 	}
 	lconn := newConn(conn, ll)
 	defer ll.addConn(lconn)
-	fmt.Printf("created connection: %#v \n", lconn)
 	return lconn, nil
 }

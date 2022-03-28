@@ -2,7 +2,6 @@ package bwqos
 
 import (
 	"context"
-	"fmt"
 	"math"
 	"net"
 	"time"
@@ -58,13 +57,11 @@ func (lc *Conn) Write(b []byte) (N int, err error) {
 		left = left + take
 	}
 
-	fmt.Println(N)
 	return
 }
 
 // Close deletes Conn from connections list and closes underlying connection.
 func (lc *Conn) Close() error {
-	fmt.Println("conn closed")
 	defer lc.listener.deleteConn(lc)
 	return lc.Conn.Close()
 }
@@ -88,6 +85,5 @@ func (lc *Conn) getTake() int {
 	if take > connLimit {
 		take = connLimit
 	}
-	fmt.Println("take: ", take, "|connNumber: ", connNumber)
 	return take
 }
